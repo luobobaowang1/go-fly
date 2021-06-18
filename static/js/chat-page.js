@@ -339,7 +339,23 @@ new Vue({
                 _this.noticeName=res.result.username;
                 _this.noticeAvatar=res.result.avatar;
                 if (res.result.welcome != null) {
-                    let msg = res.result.welcome;
+                    let msg =[];
+                    //在线
+                    if(res.result.status==="online"){
+                        for(let i = 0;i<res.result.welcome.length;i++){
+                            let m = res.result.welcome[i];
+                            if(m.type===0){
+                               msg.push(m);
+                            }
+                        }
+                    }else {
+                        for(let i = 0;i<res.result.welcome.length;i++){
+                            let m = res.result.welcome[i];
+                            if(m.type===1){
+                                msg.push(m);
+                            }
+                        }
+                    }
                     var len=msg.length;
                     var i=0;
                     if(len>0){
@@ -360,7 +376,7 @@ new Vue({
                             }
       
                             i++;
-                        },4000);
+                        },1000);
                     }
 
                 }

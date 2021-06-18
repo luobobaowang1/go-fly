@@ -7,11 +7,12 @@ type Welcome struct {
 	UserId    string    `json:"user_id"`
 	Keyword   string    `json:"keyword"`
 	Content   string    `json:"content"`
+	Type      int       `json:"type"`
 	IsDefault uint      `json:"is_default"`
 	Ctime     time.Time `json:"ctime"`
 }
 
-func CreateWelcome(userId string, content string) uint {
+func CreateWelcome(userId string, content string, type_ int) uint {
 	if userId == "" || content == "" {
 		return 0
 	}
@@ -20,6 +21,7 @@ func CreateWelcome(userId string, content string) uint {
 		Content: content,
 		Ctime:   time.Now(),
 		Keyword: "welcome",
+		Type:    type_,
 	}
 	DB.Create(w)
 	return w.ID

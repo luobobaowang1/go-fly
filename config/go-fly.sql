@@ -83,6 +83,7 @@ CREATE TABLE `welcome` (
  `user_id` varchar(100) NOT NULL DEFAULT '',
  `keyword` varchar(100) NOT NULL DEFAULT '',
  `content` varchar(500) NOT NULL DEFAULT '',
+ `type` int NOT NULL DEFAULT 0,
  `is_default` tinyint(3) unsigned NOT NULL DEFAULT '0',
  `ctime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),

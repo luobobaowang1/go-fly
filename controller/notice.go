@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/taoshihan1991/imaptool/models"
 	"github.com/taoshihan1991/imaptool/ws"
+	"strconv"
 	"time"
 )
 
@@ -18,6 +19,7 @@ func GetNotice(c *gin.Context) {
 			"name":    user.Nickname,
 			"avator":  user.Avator,
 			"is_kefu": false,
+			"type":welcome.Type,
 			"content": welcome.Content,
 			"time":    time.Now().Format("2006-01-02 15:04:05"),
 		}
@@ -52,7 +54,9 @@ func GetNotices(c *gin.Context) {
 func PostNotice(c *gin.Context) {
 	kefuId, _ := c.Get("kefu_name")
 	content := c.PostForm("content")
-	models.CreateWelcome(fmt.Sprintf("%s", kefuId), content)
+	t := c.PostForm("type")
+	type_, _ := strconv.Atoi(t)
+	models.CreateWelcome(fmt.Sprintf("%s", kefuId), content, type_)
 	c.JSON(200, gin.H{
 		"code":   200,
 		"msg":    "ok",
