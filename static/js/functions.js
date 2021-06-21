@@ -101,6 +101,10 @@ function replaceContent (content,baseUrl) {// 转义聊天内容中的特殊字�
             var src = face.replace(/^\[([^\s\[\]]+?)\]+link\[/g, '').replace(/\]/g, '');
             return '<a href="'+src+'" target="_blank" />【'+text+'】</a>';
         })
+        .replace(/link\[([^\s\[\]]+?)\]/g, function (face) {  // 转义图片
+            var src = face.replace(/^link\[/g, '').replace(/\]/g, '');;
+            return '<a href="'+src+'" target="view_window"/>'+src+'</a>';
+        })
         .replace(html(), '\<$1 $2\>').replace(html('/'), '\</$1\>') // 转移HTML代码
         .replace(/\n/g, '<br>') // 转义换行
 
